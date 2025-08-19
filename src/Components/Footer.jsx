@@ -1,68 +1,102 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { BiLogoFacebook, BiLogoInstagram, BiLogoLinkedin } from "react-icons/bi";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  BiLogoFacebook,
+  BiLogoInstagram,
+  BiLogoLinkedin,
+  BiArrowToTop,
+} from "react-icons/bi";
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
-    // Define navigation links to avoid repetition
-    const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'About', path: '/about' },
-        { name: 'Projects', path: '/projects' },
-        { name: 'Contact', path: '/contact' },
-        // Add more links if needed, e.g., Privacy Policy, Terms of Service
-        // { name: 'Privacy Policy', path: '/privacy' },
-    ];
+  // Navigation links
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
+  ];
 
-    // Define social media links
-    const socialLinks = [
-        { icon: <BiLogoFacebook size={24} />, href: "https://www.facebook.com/share/1C9vDUJ5qP/", label: "Facebook" },
-        { icon: <BiLogoInstagram size={24} />, href: "https://www.instagram.com/echannyonda?igsh=MTcwdmE3ZnB2cHN5dA==", label: "Instagram" },
-        { icon: <BiLogoLinkedin size={24} />, href: "http://www.linkedin.com/in/echannyidagu", label: "LinkedIn" },
-    ];
+  // Social links
+  const socialLinks = [
+    {
+      icon: BiLogoFacebook,
+      href: "https://www.facebook.com/share/1C9vDUJ5qP/",
+      label: "Facebook",
+    },
+    {
+      icon: BiLogoInstagram,
+      href: "https://www.instagram.com/echannyonda?igsh=MTcwdmE3ZnB2cHN5dA==",
+      label: "Instagram",
+    },
+    {
+      icon: BiLogoLinkedin,
+      href: "http://www.linkedin.com/in/echannyidagu",
+      label: "LinkedIn",
+    },
+  ];
 
-    return (
-        <footer className="bg-gray-950 text-white py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-700">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
-                {/* Copyright Information */}
-                <div className="text-gray-400">
-                    <p className="text-sm">
-                        &copy; {currentYear} Echanny Idagu. All rights reserved.
-                    </p>
-                </div>
+  // Scroll-to-top handler
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-                {/* Navigation Links */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-gray-400">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            className="hover:text-yellow-400 transition-colors duration-200 text-sm" // Added text-sm for better consistency
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                </div>
+  return (
+    <footer className="bg-gray-950 text-white py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800 mt-auto">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+        {/* Copyright */}
+        <p className="text-sm text-gray-400">
+          &copy; {currentYear} Echanny Idagu. All rights reserved.
+        </p>
 
-                {/* Social Media Links */}
-                <div className="flex justify-center md:justify-end space-x-4">
-                    {socialLinks.map((social) => (
-                        <a
-                            key={social.label} // Use label as key for uniqueness
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-yellow-400 transition-colors duration-200 text-2xl" // Ensured icon size is consistent
-                            aria-label={social.label}
-                        >
-                            {social.icon}
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </footer>
-    );
+        {/* Navigation */}
+        <nav>
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-400">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  className="hover:text-yellow-400 transition-colors duration-200"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Social + Back to Top */}
+        <div className="flex items-center space-x-4">
+          {/* Social links */}
+          <ul className="flex space-x-4">
+            {socialLinks.map(({ icon: Icon, href, label }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
+                >
+                  <Icon size={22} />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Back to Top */}
+          <button
+            onClick={scrollToTop}
+            className="ml-4 flex items-center space-x-1 px-3 py-1 bg-yellow-500 text-black text-sm rounded-lg hover:bg-yellow-400 transition-colors duration-200"
+          >
+            <BiArrowToTop size={18} />
+            <span>Top</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

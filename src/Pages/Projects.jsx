@@ -1,9 +1,8 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react'; // Icons for GitHub and live demo links
-
+import { Github, ExternalLink } from 'lucide-react'; 
+import { motion } from 'framer-motion'; // ✅ Import Framer Motion
 
 const Projects = () => {
-    // Centralized data for all projects. This makes adding/editing projects easy.
     const projectsData = [
         {
             id: 1,
@@ -32,37 +31,45 @@ const Projects = () => {
             liveUrl: "https://color-guessing-game-usz9.vercel.app/",
             githubUrl: "https://github.com/EchannyE/color-guessing-game.git",
         },
-    
         {
             id: 5,
             title: "Portfolio Website",
             description: "This very portfolio website you are viewing. Built from the ground up to showcase my skills in a clean and professional manner.",
             imageUrl: "https://placehold.co/400x250/1f2937/d1d5db?text=Portfolio",
             techStack: ["React", "Tailwind CSS"],
-            liveUrl: "https://echanny-portfolio.vercel.app/",
+            liveUrl: "https://portfolio-new-murex-ten-75.vercel.app/",
             githubUrl: "https://github.com/EchannyE/Portfolio-new.git"
         },
-        
     ];
 
     return (
         <section className='bg-gray-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 min-h-screen text-gray-800 dark:text-gray-200'>
             <div className='max-w-7xl mx-auto'>
                 {/* Section Title */}
-                <h2 className='text-4xl font-extrabold text-yellow-500 dark:text-yellow-400 mb-12 text-center relative
-                                after:absolute after:bottom-[-8px] after:left-1/2 after:-translate-x-1/2
-                                after:w-20 after:h-1 after:bg-yellow-500 dark:after:bg-yellow-400 after:rounded-full'>
+                <motion.h2
+                    initial={{ opacity: 0, y: -30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className='text-4xl font-extrabold text-yellow-500 dark:text-yellow-400 mb-12 text-center relative
+                               after:absolute after:bottom-[-8px] after:left-1/2 after:-translate-x-1/2
+                               after:w-20 after:h-1 after:bg-yellow-500 dark:after:bg-yellow-400 after:rounded-full'
+                >
                     My Projects
-                </h2>
+                </motion.h2>
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    {projectsData.map((project) => (
-                        <div
+                    {projectsData.map((project, index) => (
+                        <motion.div
                             key={project.id}
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.2 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.05 }}
                             className="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden
-                                       transition-transform duration-300 hover:scale-105 hover:shadow-2xl
-                                       border border-gray-200 dark:border-gray-700"
+                                       transition-transform duration-300 border border-gray-200 dark:border-gray-700"
                         >
                             <img
                                 src={project.imageUrl}
@@ -109,7 +116,7 @@ const Projects = () => {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
